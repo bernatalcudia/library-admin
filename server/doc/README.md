@@ -23,8 +23,8 @@ RESPONSE
 POST /loans
 REQUEST 
 {
-    member_id: int,
-    book_id: int,
+    memberId: int,
+    bookId: int,
 }
 RESPONSE
 {
@@ -38,7 +38,7 @@ PATCH /loans
 REQUEST
 {
 
-    book_id: int,
+    bookId: int,
 }
 
 RESPONSE 
@@ -53,7 +53,7 @@ RESPONSE
 ## Use case: List member loans
 
 ```
-GET /loan?memberId=member_id
+GET /loan?memberId=memberId
 REQUEST
 {
 
