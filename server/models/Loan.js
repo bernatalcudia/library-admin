@@ -1,6 +1,7 @@
-const { DataTypes } = require("sequelize");
-const db = require("../db");
+const { DataTypes } = require("sequelize")
+const db = require("../db")
 const Book = require("./Book")
+const Member = require("./Member")
 
 const Loan = db.sequelize.define(
   "Loan",
@@ -22,5 +23,8 @@ const Loan = db.sequelize.define(
 
 Book.hasMany(Loan)
 Loan.belongsTo(Book)
+
+Member.hasMany(Loan)
+Loan.belongsTo(Member)
 
 module.exports = Loan;

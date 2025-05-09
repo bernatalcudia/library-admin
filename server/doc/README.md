@@ -50,10 +50,10 @@ RESPONSE
 ```
 
 
-## Use case: List member loans
+## Use case: List  loans and member filtered
 
 ```
-GET /loan?memberId=memberId
+GET /loan?memberId=memberId&activeLoans=boolean
 REQUEST
 {
 
