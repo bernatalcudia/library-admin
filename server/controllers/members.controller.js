@@ -1,6 +1,7 @@
 const Member = require("../models/Member.js")
 const bcryptjs = require("bcryptjs")
-
+const jwt = require("jsonwebtoken")
+const { jwt_secret } = require("../config/config.json")["development"]
 
 const login = async (req, res) => {
     const memberUsername = req.body.username
@@ -22,10 +23,19 @@ const login = async (req, res) => {
     if (!isPasswordMatch) {
         res.status(400).send("Incorrect password")
     }
-    res.status(201).send({ key: user.id })
+
+    const token = jwt.sign({ id: user.id }, jwt_secret)
+
+    res.status(201).send("Token", token)
+
+}
 
 
 
+const createMember = async (req, res) => {
+    const memberName = req.body.name
+    const memberUsername = req.body.user
+    const memberPassword = req.body.password
 
     try {
 
@@ -35,24 +45,23 @@ const login = async (req, res) => {
             return
         }
 
-        const createMember = async (req, res) => {
-            const memberName = req.body.name
-            const createdMember = await Member.create({
-                name: memberName,
-                user: memberUsername,
-                registrationDate: new Date(),
-                password: hashedPassword,
-            })
-            res.status(201).send({ id: createMember.id })
-        }
+
+        const createdMember = await Member.create({
+            name: memberName,
+            user: memberUsername,
+            registrationDate: new Date(),
+            password: hashedPassword,
+        })
+        res.status(201).send({ id: createMember.id })
+
 
     } catch (error) {
         console.log(error)
         res.status(500).send("Unexpected register error")
     }
 
-
 }
+
 
 
 
