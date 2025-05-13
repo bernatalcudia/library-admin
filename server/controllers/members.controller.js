@@ -1,5 +1,6 @@
 const Member = require("../models/Member.js")
 const bcryptjs = require("bcryptjs")
+
 const jwt = require("jsonwebtoken")
 const { jwt_secret } = require("../config/config.json")["development"]
 
@@ -26,7 +27,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign({ id: user.id }, jwt_secret)
 
-    res.status(201).send("Token", token)
+    res.status(201).send({ token: token })
 
 }
 

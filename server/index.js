@@ -7,6 +7,7 @@ const authMiddleware = require("./middlewares/auth")
 const booksRouter = require("./routes/books.routes")
 const membersRouter = require("./routes/member.routes")
 const loansRouter = require("./routes/loans.routes")
+const usersRouter = require("./routes/users.routes")
 
 const main = () => {
   const app = express();
@@ -20,6 +21,7 @@ const main = () => {
   app.use("/books", booksRouter);
   app.use("/members", membersRouter)
   app.use("/loans", authMiddleware.authMiddleware, loansRouter)
+  app.use("/users", authMiddleware.authMiddleware, usersRouter)
 
   app.listen(port, () => {
     console.log(`App listening on ${port}`);
