@@ -23,6 +23,8 @@ const authMiddleware = async (req, res, next) => {
 
     const token = req.headers.authorization
 
+    const payload = jwt.verify(token, jwt_secret)
+
     const userToken = user.token
 
     if (!userToken) {
